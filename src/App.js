@@ -1,9 +1,7 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import CurrentlyReading from './CurrentlyReading'
-import WantToRead from './WantToRead'
-import Read from './Read'
+import Shelf from './Shelf'
 
 class BooksApp extends React.Component {
   state = {
@@ -24,7 +22,7 @@ class BooksApp extends React.Component {
         book.shelf === 'currentlyReading'
        ));
       const wantToReadBooks = books.filter((book) => (
-        book.shelf === 'currentlyReading'
+        book.shelf === 'wantToRead'
        ));
        const read = books.filter((book) => (
          book.shelf === 'read'
@@ -71,9 +69,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <CurrentlyReading books={this.state.currentlyReadingBooks}/>
-                <WantToRead books={this.state.wantToReadBooks}/>
-                <Read books={this.state.read}/>
+                <Shelf books={this.state.currentlyReadingBooks} shelf={'Currently Reading'} />
+                <Shelf books={this.state.wantToReadBooks} shelf={'Want To Read'} />
+                <Shelf books={this.state.read} shelf={'Read'} />
               </div>
             </div>
             <div className="open-search">

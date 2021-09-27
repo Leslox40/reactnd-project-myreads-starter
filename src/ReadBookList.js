@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 import Book from './Book'
 
-class BookList extends Component {
+class ReadBookList extends Component {
 
     render() {
-        const { wantToRead } = this.props;
-        console.log(wantToRead);
-
+        // Rendering the different shelves
+        const { read } = this.props;
         return (
             <ol className="books-grid">
-               { wantToRead.map(book => (
+               { read.map(book => (
                    <Book key={book.id} book={book}/>
                ))}
+
             </ol>
         )
     }
 }
 
-export default BookList
+export default ReadBookList
