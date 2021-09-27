@@ -6,6 +6,17 @@ class CurrentlyReading extends Component {
         currentlyReadingBooks: [],
     };
 
+    // Function filter's Books array passed as props and updates state
+    filterCurrentlyReadingBooks = () => {
+       const  { books } = this.props;
+       const currentlyReadingBooks = books.filter((book) => (
+        book.shelf === 'currentlyReading'
+       ));
+       this.setState((currentState) => ({
+           currentlyReadingBooks
+       }))
+    }
+
     render() {
         return (
             <div className="bookshelf">
