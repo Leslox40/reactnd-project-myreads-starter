@@ -13,7 +13,13 @@ class BooksApp extends React.Component {
     showSearchPage: false,
   }
 
+  // Fetch books from API and add to state
   componentDidMount() {
+    this.updateUI();
+  };
+
+  //Function to move updateUI when shelves changes
+  updateUI = () => {
     BooksAPI.getAll()
     .then(books => {
 
@@ -69,9 +75,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Shelf books={this.state.currentlyReadingBooks} shelf={'Currently Reading'} />
-                <Shelf books={this.state.wantToReadBooks} shelf={'Want To Read'} />
-                <Shelf books={this.state.read} shelf={'Read'} />
+                <Shelf books={this.state.currentlyReadingBooks} shelf={'Currently Reading'} updateUI={this.updateUI}/>
+                <Shelf books={this.state.wantToReadBooks} shelf={'Want To Read'} updateUI={this.updateUI} />
+                <Shelf books={this.state.read} shelf={'Read'} updateUI={this.updateUI} />
               </div>
             </div>
             <div className="open-search">
