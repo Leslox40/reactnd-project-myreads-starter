@@ -6,12 +6,14 @@ class Book extends Component {
         value: '',
     };
 
+    //Initialize value property to the shelf of the boook 
     componentDidMount() {
         this.setState((currentState) => ({
              value: this.props.book.shelf
          }))
     };
 
+    //handles controlled component
     handleChange = (event) => {
         this.setState({ value: event.target.value });
 
