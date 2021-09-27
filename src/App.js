@@ -8,17 +8,37 @@ import Read from './Read'
 class BooksApp extends React.Component {
   state = {
     books: [],
+    currentlyReadingBooks: [],
+    wantToReadBooks: [],
+    read: [],
+
     showSearchPage: false,
   }
 
   componentDidMount() {
     BooksAPI.getAll()
     .then(books => {
+
+      // Filter each bookshelf and set state
+      const currentlyReadingBooks = books.filter((book) => (
+        book.shelf === 'currentlyReading'
+       ));
+      const wantToReadBooks = books.filter((book) => (
+        book.shelf === 'currentlyReading'
+       ));
+       const read = books.filter((book) => (
+         book.shelf === 'read'
+       ))
+
+
       this.setState((currentState) => ({
-        books
-      }))
-    })
-  }
+        books,
+        currentlyReadingBooks,
+        wantToReadBooks,
+        read,
+      }));
+    });
+  };
 
   render() {
     return (
@@ -51,9 +71,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <CurrentlyReading books={this.state.books}/>
-                <WantToRead />
-                <Read />
+                <CurrentlyReading books={this.state.currentlyReadingBooks}/>
+                <WantToRead books={this.state.wantToReadBooks}/>
+                <Read books={this.state.read}/>
               </div>
             </div>
             <div className="open-search">

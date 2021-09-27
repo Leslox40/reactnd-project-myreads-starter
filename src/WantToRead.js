@@ -1,24 +1,10 @@
 import React, { Component } from 'react'
 import BookList from './BookList'
 
-class wantToRead extends Component {
-    state = {
-        wantToReadBooks: [],
-    }
-
-    // Function filter's Books array passed as props and updates state
-    filterWantToReadBooks = () => {
-        const  { books } = this.props;
-        const wantToReadBooks = books.filter((book) => (
-         book.shelf === 'currentlyReading'
-        ));
-        this.setState((currentState) => ({
-            wantToReadBooks
-        }))
-     }
+class WantToRead extends Component {
 
     render() {
-       const { wantToReadBooks } = this.state
+       const wantToReadBooks = this.props.books;
         return (
             <div className="bookshelf">
                 <h2 className="bookshelf-title">Want to Read</h2>
@@ -30,4 +16,4 @@ class wantToRead extends Component {
     }
 }
 
-export default wantToRead
+export default WantToRead

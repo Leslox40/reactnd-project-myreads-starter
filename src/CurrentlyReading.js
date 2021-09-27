@@ -13,7 +13,7 @@ class CurrentlyReading extends Component {
         book.shelf === 'currentlyReading'
        ));
        this.setState((currentState) => ({
-           currentlyReadingBooks
+           currentlyReadingBooks: [...currentState, currentlyReadingBooks]
        }))
     }
 

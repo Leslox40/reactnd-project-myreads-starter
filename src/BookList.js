@@ -4,9 +4,14 @@ import Book from './Book'
 class BookList extends Component {
 
     render() {
+        const { wantToRead } = this.props;
+        console.log(wantToRead);
+
         return (
             <ol className="books-grid">
-               <Book />
+               { wantToRead.map(book => (
+                   <Book key={book.id} book={book}/>
+               ))}
             </ol>
         )
     }
