@@ -46,22 +46,40 @@ class BooksApp extends React.Component {
   };
 
   render() {
+
+    const shelves = [
+      {
+        stateKey: 'currentlyReadingBooks',
+        shelf: 'Currently Reading',
+      },
+      {
+        stateKey: 'wantToReadBooks',
+        shelf: 'Want To Read',
+      },
+      {
+        stateKey: 'read',
+        shelf: 'Read',
+      }
+    ]
+
     return (
-        <div className="list-books">
-          <div className="list-books-title">
-            <h1>MyReads</h1>
-          </div>
-          <div className="list-books-content">
-            <div>
-              <Shelf books={this.state.currentlyReadingBooks} shelf={'Currently Reading'} updateUI={this.updateUI} />
-              <Shelf books={this.state.wantToReadBooks} shelf={'Want To Read'} updateUI={this.updateUI} />
-              <Shelf books={this.state.read} shelf={'Read'} updateUI={this.updateUI} />
-            </div>
-          </div>
-          <div className="open-search">
-            <Link to='/search'>Add a book</Link>
+      <div className="list-books">
+        <div className="list-books-title">
+          <h1>MyReads</h1>
+        </div>
+        <div className="list-books-content">
+          <div>
+            {
+              shelves.map((shelf) => (
+                <Shelf books={this.state[shelf.stateKey]} shelf={shelf.shelf} updateUI={this.updateUI} key={shelf.stateKey} />
+              ))
+            }
           </div>
         </div>
+        <div className="open-search">
+          <Link to='/search'>Add a book</Link>
+        </div>
+      </div>
     )
   }
 }
@@ -70,14 +88,14 @@ class App extends Component {
   render() {
     return (
       <div className='app'>
-        <Route exact path='/' render={( () => (
+        <Route exact path='/' render={(() => (
           <BooksApp />
-        ) )}
+        ))}
         />
 
-        <Route exact path='/search' render={( () => (
+        <Route exact path='/search' render={(() => (
           <Search />
-        ) )}
+        ))}
         />
       </div>
     )

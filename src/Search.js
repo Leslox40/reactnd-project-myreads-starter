@@ -5,64 +5,63 @@ import * as BooksAPI from './BooksAPI'
 
 class Search extends Component {
 
-    state = {
-        query: '',
-        books: [],
-    };
+  state = {
+    books: [],
+  };
 
-    handleChange = (event) => {
-        this.setState({ query: event.target.value })
-    }
+  handleChange = (event) => {
+    const userQuery = event.target.value;
 
-    updateBooks = (books) => {
-        console.log('books', books)
-        if(books !== undefined ) {
-            this.setState(currentState => ({
-                books,
-            }));
-        }
-        
-    };
-
-    updateUI = () => {
-
-    }
-
-    render() {
-        const { query, books } = this.state;
-
-        const showingBooks = query === '' ? 
-        '' :
-        BooksAPI.search(query)
+    userQuery === '' ? this.updateBooks([]) :
+      BooksAPI.search(userQuery)
         .then(booksResult => {
-            this.updateBooks(booksResult);
+          booksResult.error ? console.log('error') : this.updateBooks(booksResult);
+        }).catch((error) => {
+          console.log('Something went wrong', error);
         });
+  }
 
-        return (
-            <div className="search-books">
-                <div className="search-books-bar">
-                    <Link to='/'
-                        className="close-search"
-                    >
-                        Close
-                    </Link>
-
-                    <div className="search-books-input-wrapper">
-
-                        <input type="text"
-                            placeholder="Search by title or author"
-                            value={this.state.query}
-                            onChange={this.handleChange}
-                        />
-
-                    </div>
-                </div>
-                <div className="search-books-results">
-                    <ShelfBookList shelfBooks={books} updateUI={this.updateUI}/>
-                </div>
-            </div>
-        )
+  updateBooks = (books) => {
+    if (books !== undefined) {
+      this.setState(currentState => ({
+        books,
+      }));
     }
+
+  };
+
+  updateUI = () => {
+
+  }
+
+  render() {
+    const { books } = this.state;
+
+    return (
+      <div className="search-books">
+        <div className="search-books-bar">
+          <Link to='/'
+            className="close-search"
+          >
+            Close
+          </Link>
+
+          <div className="search-books-input-wrapper">
+
+            <input type="text"
+              placeholder="Search by title or author"
+              value={this.state.query}
+              onChange={this.handleChange}
+            />
+
+          </div>
+        </div>
+        <div className="search-books-results">
+          <ShelfBookList shelfBooks={books} updateUI={this.updateUI} />
+        </div>
+      </div>
+    )
+  }
 }
 
 export default Search
