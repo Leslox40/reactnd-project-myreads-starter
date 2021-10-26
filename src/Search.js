@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import ShelfBookList from './ShelfBookList'
+import SearchBookList from './SearchBookList'
 import * as BooksAPI from './BooksAPI'
 
 class Search extends Component {
@@ -30,7 +30,17 @@ class Search extends Component {
 
   };
 
-  updateUI = () => {
+  checkIfBookHasShelf = (book) => {
+      const apiBooks = this.props.books;
+
+      const checkedBook = apiBooks.filter((apiBook) => (
+        book.id === apiBook.id
+      ));
+
+      if(checkedBook.length === 1) {
+        const shelf = checkedBook[0].shelf;
+        console.log(shelf);
+      }
 
   }
 
@@ -57,7 +67,7 @@ class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <ShelfBookList shelfBooks={books} updateUI={this.updateUI} />
+          <SearchBookList searchBooks={books} updateUI={this.props.updateUI} state={this.props.state} />
         </div>
       </div>
     )
