@@ -23,7 +23,6 @@ class Book extends Component {
     this.setState({ value: event.target.value });
 
     const shelf = event.target.value;
-    console.log('handle Change shelf', shelf);
 
     //update API with new shelf
     this.updateBook(book, shelf);

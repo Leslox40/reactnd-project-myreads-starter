@@ -15,7 +15,7 @@ class Search extends Component {
     userQuery === '' ? this.updateBooks([]) :
       BooksAPI.search(userQuery)
         .then(booksResult => {
-          booksResult.error ? console.log('error') : this.updateBooks(booksResult);
+          booksResult.error ? this.updateBooks([]) : this.updateBooks(booksResult);
         }).catch((error) => {
           console.log('Something went wrong', error);
         });
