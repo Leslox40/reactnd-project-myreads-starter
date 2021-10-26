@@ -8,7 +8,6 @@ class Book extends Component {
 
   //Initialize value property to the shelf of the boook 
   componentDidMount() {
-    console.log(this.props.book);;
     const checker = this.props.book.shelf === undefined ? 'none' : this.props.book.shelf;
 
     this.setState((currentState) => ({

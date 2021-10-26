@@ -11,7 +11,6 @@ class SearchBookList extends Component {
       <ol className="books-grid">
         {searchBooks.map(book => {
           const apiBooks = this.props.state.books;
-          console.log('API books', apiBooks)
 
           const checkedBook = apiBooks.filter((apiBook) => (
             book.id === apiBook.id
