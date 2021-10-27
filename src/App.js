@@ -34,7 +34,7 @@ class BooksApp extends React.Component {
           <div>
             {
               shelves.map((shelf) => (
-                <Shelf books={this.props.state[shelf.stateKey]} shelf={shelf.shelf} updateUI={this.updateUI} key={shelf.stateKey} />
+                <Shelf books={this.props.state[shelf.stateKey]} shelf={shelf.shelf} updateUI={this.props.updateUI} key={shelf.stateKey} />
               ))
             }
           </div>
